@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
-import Lauches from './components/launches'
+import Launches from './components/launches'
+import Launch from './components/launch'
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
-// import { Menu } from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
+import './App.css';
 
 
 const client = new ApolloClient({
@@ -14,8 +17,14 @@ class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
-       <h1>SpaceX</h1>
-      <Lauches/>
+      <Router>
+      <Container className="container" text>
+          <h1 className="topic">SpaceX</h1>
+          <Route exact path="/" component={Launches} />  
+          <Route exact path="/launch/:flight_number" component={Launch} /> 
+      </Container>
+      </Router>
+      
       </ApolloProvider>
       
     )
